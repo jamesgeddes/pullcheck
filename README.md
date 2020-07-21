@@ -5,7 +5,7 @@ Change variables in config.py for your setup. Configure git to use SSH that does
 
 Designed for Ubuntu Linux. `pullcheck` should be set to autorun on boot, not your target program.  
 
-##Basic Structure
+## Basic Structure
 1. run `git pull` on `git_url`
 1. if `git_pull_change` is `True` then stop target program
 1. Start target program
