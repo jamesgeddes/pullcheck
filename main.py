@@ -32,6 +32,7 @@ def target_stop(target):
 
 def target_restart(target):
     stopped = target_stop(target)
+    print(f"stopped={stopped}")
     # stop_count = 0
     while stopped != 0:  # naive assumption that the program will close gracefully without returning errors
         print("Can't stop")
@@ -41,6 +42,7 @@ def target_restart(target):
         #     pass  # you might like to add an action here
 
     started = target_start(target)
+    print(f"started={started}")
     # start_count = 0
     while started is not None:
         print("Can't start")
