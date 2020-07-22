@@ -1,10 +1,10 @@
-from config import git_local_path, target_program
+from config import git_local_path, target_program, pull_wait
 from time import sleep
 import subprocess as sp
 import git
 
-target_program += ".py"
 git_local_path += "/"
+target_program += ".py"
 
 
 def git_pull_change(path):
@@ -31,9 +31,23 @@ def target_stop(target):
 
 
 def target_restart(target):
-    target_stop(target)
-    target_start(target)
+    stopped = target_stop(target)
+    # stop_count = 0
+    while stopped != 0:  # naive assumption that the program will close gracefully without returning errors
+        print("Can't stop")
+        stopped = target_stop(target)
+        # stop_count += 1
+        # if stop_count > 100:  # a branchless no no, but then again this is not assembly so meh.
+        #     pass  # you might like to add an action here
 
+    started = target_start(target)
+    # start_count = 0
+    while started is not None:
+        print("Can't start")
+        started = target_start(target)
+        # start_count += 1
+        # if start_count > 100:
+        #     pass  # you might like to add an action here
 
 target_start(target_program)
 while True:
@@ -41,5 +55,5 @@ while True:
         target_restart(target_program)
     else:
         pass
-    sleep(60)
+    sleep(pull_wait)
 
